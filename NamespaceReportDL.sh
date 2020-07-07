@@ -1,4 +1,6 @@
 #!/bin/bash
+# Create a new daily directory, delete the previous day's directory, download daily reports from all clusters and tar them
+
 today=$(date +'%Y%m%d')
 yesterday=$(date -d "yesterday 11:00" '+%Y%m%d')
 
@@ -21,4 +23,4 @@ scp user@hostname4.comcast.net:/root/ClusterInventory/PopulatedNamespaces_$today
 scp user@hostname4.comcast.net:/root/ClusterInventory/EmptyNamespaces_$today.csv /home/username/ClusterInventories/AllClusters_$today
 
 # Zip up for easier download to local
-tar -czf AllClusterReports_$today.tgz /home/username/ClusterInventories/*_$today.csv
+tar -cf AllClusterReports_$today.tar /home/username/ClusterInventories/*_$today.csv
