@@ -1,4 +1,6 @@
 #!/bin/bash
+# Loops through each namespace on the cluster, checking the number of running pods and listing each namespace in one of two csv files depending on if it has active pods or not
+
 today=$(date +'%Y%m%d')
 if [ -f /root/ClusterInventory/AllActiveNamespaces.txt ]; then
      rm -f /root/ClusterInventory/AllActiveNamespaces.txt
