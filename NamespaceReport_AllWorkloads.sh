@@ -5,9 +5,9 @@ today=$(date +'%Y%m%d')
 mkdir -p /root/ClusterInventory
 
 # Cleanup previously day's run, if file is present
-if [ -f /root/ClusterInventory/AllActiveNamespaces.txt ] 
+if [ -f /root/ClusterInventory/AllNamespaces.txt ] 
 then
-     rm -f /root/ClusterInventory/AllActiveNamespaces.txt
+     rm -f /root/ClusterInventory/AllNamespaces.txt
 fi
 
 # Generate a list of all active namespaces on the cluster
