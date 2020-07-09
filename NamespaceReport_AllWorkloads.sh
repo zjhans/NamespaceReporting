@@ -1,6 +1,9 @@
 #!/bin/bash
 today=$(date +'%Y%m%d')
 
+# Create working directory, if not already present
+mkdir -p /root/ClusterInventory
+
 # Cleanup previously day's run, if file is present
 if [ -f /root/ClusterInventory/AllActiveNamespaces.txt ] 
 then
