@@ -22,7 +22,7 @@ for i in `cat /root/ClusterInventory/AllNamespaces.txt`
 done
 
 # Loop through namespaces without cronjobs and find any with pods - these are also assumed to be in use
-for i in `cat /root/ClusterInventory/HOC1-NoCronjobs_$today.csv`
+for i in `cat /root/ClusterInventory/CLUSTNAME-NoCronjobs_$today.csv`
     do PODCNT=`oc get pods -n $i | grep -v READY | grep 'Running\|Completed' | wc -l`
     if [ "$PODCNT" -ge "1" ]
     then
