@@ -1,14 +1,14 @@
 #!/bin/bash
 today=$(date +'%Y%m%d')
 
-# Create working directory, if not already present
-mkdir -p /root/ClusterInventory
-
-# Cleanup previously day's run, if file is present
-if [ -f /root/ClusterInventory/AllNamespaces.txt ] 
+# Cleanup any previous runs for the day to avoid appending duplicate data to files
+if [ -d /root/ClusterInventory/$today/ ] 
 then
-     rm -f /root/ClusterInventory/AllNamespaces.txt
+     rm -rf /root/ClusterInventory/$today/
 fi
+
+# Create daily report directory, ignoring errors if it already exist
+mkdir -p /root/ClusterInventory/$today
 
 # Generate a list of all active namespaces on the cluster
 oc get namespaces | awk '{print $1}' | grep -v NAME > /root/ClusterInventory/AllNamespaces.txt
@@ -46,3 +46,6 @@ for i in `cat /root/ClusterInventory/CLUSTNAME-NoPods_$today.csv`
         echo "$i" >> /root/ClusterInventory/CLUSTNAME-NoActResources_$today.csv
     fi
 done
+
+# tar all generated files for easier download to jump server
+tar -cf /root/ClusterInventory/CLUSTNAME_$today.tar /root/ClusterInventory/$today/
